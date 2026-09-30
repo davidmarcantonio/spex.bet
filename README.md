@@ -28,7 +28,7 @@ Edit the HTML directly and push to `main`. The `Deploy spex.bet` workflow builds
 The workflow looks up the latest `spex-glance` release and writes it into every `<span data-version>` and the `softwareVersion` schema field before deploying. It runs on push, daily, on demand, and on a `repository_dispatch` with `event_type: release`. To trigger it from `release.sh --publish`:
 
 ```sh
-gh api repos/davidmarcantonio/spex.bets/dispatches -f event_type=release
+gh api repos/davidmarcantonio/spex.bet/dispatches -f event_type=release
 ```
 
 The committed HTML carries whatever version was current at the last edit; the deployed site always carries the latest release.
