@@ -1,8 +1,8 @@
-# spex.bets
+# spex.bet
 
 Landing site for the Spex family of Kalshi sports-position tools. `/` is the brand page, `/glance/` is [Spex Glance](https://github.com/davidmarcantonio/spex-glance) (macOS). Future apps get their own folder (`/board/`, `/ios/`).
 
-Static HTML, no build step, hosted on GitHub Pages at https://spex.bets.
+Static HTML, no build step, hosted on GitHub Pages at https://spex.bet.
 
 ## Layout
 
