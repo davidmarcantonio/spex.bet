@@ -1,6 +1,6 @@
 # spex.bets
 
-Marketing site for [Spex Glance](https://github.com/davidmarcantonio/spex-glance), a free, open-source macOS app that shows your active Kalshi sports positions in one window and from the menu bar.
+Landing site for the Spex family of Kalshi sports-position tools. `/` is the brand page, `/glance/` is [Spex Glance](https://github.com/davidmarcantonio/spex-glance) (macOS). Future apps get their own folder (`/board/`, `/ios/`).
 
 Static HTML, no build step, hosted on GitHub Pages at https://spex.bets.
 
@@ -8,7 +8,9 @@ Static HTML, no build step, hosted on GitHub Pages at https://spex.bets.
 
 | File | Purpose |
 |---|---|
-| `index.html` | Landing page (single file, inline CSS, SEO meta + JSON-LD) |
+| `index.html` | Spex brand landing (app cards) |
+| `glance/index.html` | Spex Glance product page |
+| `assets/site.css` | Shared styles |
 | `privacy.html` | Privacy note |
 | `404.html` | Not-found page |
 | `assets/spex-mark.svg` | Logo / favicon |
