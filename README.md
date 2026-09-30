@@ -23,7 +23,7 @@ Edit the HTML directly and push to `main`. Pages redeploys in about a minute.
 
 ## To do before launch
 
-- [x] Real screenshots (assets/screenshot-*.png, captured 2026-09-29)
+- [x] Real screenshots (assets/screenshot-*.png, detail-live.png, captured 2026-09-29)
 - [x] `assets/og.png` (1200×630) for link previews
 - [ ] Confirm the release URL once `spex-glance` has a tagged release
 

@@ -91,8 +91,6 @@ p{margin:0 0 1em}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 .eyebrow{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--cobalt);margin-bottom:10px}
 .muted{color:var(--muted)}
-.tldr{font-family:var(--mono);font-size:.95rem;line-height:1.6;border-left:3px solid var(--cobalt);padding:6px 0 6px 16px;margin:0 0 26px;max-width:52ch;color:var(--muted)}
-.tldr b{color:var(--fg);font-weight:600}
 
 nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);font-family:var(--display);font-weight:500;font-size:1.15rem}
@@ -177,7 +175,6 @@ footer li{margin:4px 0}
     <div>
       <div class="eyebrow">Free · Open source · macOS</div>
       <h1>Your open Kalshi sports bets. One window.</h1>
-      <p class="tldr"><b>tl;dr</b> - Open sports positions in one Mac window. Live prices, live P&amp;L. Read-only key, no orders. Free, MIT.</p>
       <p class="lede">Spex Glance is a small Mac app that keeps tabs on your open sports positions on Kalshi. Current and upcoming games, what you paid, what each side is worth right now, what it pays if it hits. Think of the Stocks app, but for your Kalshi sports positions.</p>
       <div class="cta-row">
         <a class="btn primary" href="https://github.com/davidmarcantonio/spex-glance/releases/latest">
@@ -201,7 +198,7 @@ footer li{margin:4px 0}
       <div>
         <div class="eyebrow">What it's for</div>
         <h2>Keep tabs without keeping a tab open.</h2>
-        <p class="muted">Kalshi shows your positions on the portfolio page, behind a login, mixed in with everything else. This is the same information, up to the second, in a window that stays out of the way or a number in the menu bar.</p>
+        <p class="muted">Kalshi's portfolio page updates live too. It also needs a browser tab, a login, and the rest of the site around it. This is the same feed in a plain window you can leave open, or a number in the menu bar, without the browser.</p>
         <div class="grid" style="margin-top:20px">
           <div class="card"><h3>Straight from Kalshi</h3><p class="muted">Prices arrive over Kalshi's WebSocket ticker, so the numbers are as current as Kalshi sends them. Grouped by game, with start times and "LIVE · 28m in" clocks, and Won or Lost once a game settles.</p></div>
           <div class="card"><h3>Nothing stored</h3><p class="muted">It streams and displays. No database, no history, no server in between. The one thing kept on your Mac is your API key, in the Keychain.</p></div>
@@ -226,8 +223,8 @@ footer li{margin:4px 0}
         <p class="muted">Free, open source, MIT. Source on GitHub, tips on Ko-fi, no account and no analytics beyond an anonymous install count.</p>
       </div>
       <div>
-        <img class="shot" src="/assets/screenshot-settings.png" width="880" height="900" alt="Spex Glance Settings: theme picker and menu bar options including Work Mode" loading="lazy" style="max-width:360px">
-        <p class="caption">Settings. That's all of them.</p>
+        <img class="shot" src="/assets/detail-live.png" width="890" height="135" alt="One live tennis match in Spex Glance: LIVE clock, the side held, current value and payout" loading="lazy" style="max-width:520px">
+        <p class="caption">One live match. Side held, what it's worth now, what it pays.</p>
       </div>
     </div>
   </div>
@@ -263,7 +260,7 @@ footer li{margin:4px 0}
 
 <section id="download" class="alt">
   <div class="wrap" style="text-align:center">
-    <h2 style="margin:0 auto .5em">Stop refreshing the portfolio page.</h2>
+    <h2 style="margin:0 auto .5em">Close the tab. Keep the window.</h2>
     <div class="cta-row" style="justify-content:center">
       <a class="btn primary" href="https://github.com/davidmarcantonio/spex-glance/releases/latest">Download for Mac</a>
       <a class="btn ghost" href="https://ko-fi.com/U4B527UPTU">Tip on Ko-fi</a>
