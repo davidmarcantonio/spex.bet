@@ -13,7 +13,7 @@ Static HTML, no build step, hosted on GitHub Pages at https://spex.bet.
 | `assets/site.css` | Shared styles |
 | `privacy.html` | Privacy note |
 | `404.html` | Not-found page |
-| `assets/spex-mark.svg` | Logo / favicon |
+| `assets/app-icon.png` | App icon, used for logo and favicon |
 | `assets/og.png` | Social share image (1200×630) — **add before launch** |
 | `CNAME` | Custom domain for GitHub Pages |
 | `robots.txt`, `sitemap.xml` | Search engine hints |
