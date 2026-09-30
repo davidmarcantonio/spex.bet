@@ -98,3 +98,8 @@ footer li{margin:4px 0}
 .features .card p{margin:0}
 .fi{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--cobalt);color:var(--cream);margin-bottom:12px}
 .fi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* detail crop shown wider than the hero window, so its text reads larger, like a magnified slice */
+.split>div{min-width:0}
+.zoom{border-radius:14px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(11,30,68,.55),0 0 0 1px var(--line);background:var(--card);width:100%;max-width:600px;margin:0 auto}
+.zoom img{width:100%;display:block}

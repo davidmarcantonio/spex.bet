@@ -35,7 +35,7 @@ The committed HTML carries whatever version was current at the last edit; the de
 
 ## To do before launch
 
-- [x] Real screenshots (assets/screenshot-*.png, screenshot-menubar.png, captured 2026-09-29)
+- [x] Real screenshots (assets/screenshot-main.png, screenshot-detail.png, screenshot-menubar.png, captured 2026-09-29)
 - [x] `assets/og.png` (1200×630) for link previews
 - [x] Space Grotesk self-hosted in `assets/fonts/` (OFL), no Google Fonts call
 - [ ] Confirm the release URL once `spex-glance` has a tagged release
