@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spex Glance — see your open Kalshi sports positions in one place on your Mac</title>
+<meta name="description" content="Spex Glance is a free, open-source macOS app that shows your active Kalshi sports positions in one clean window and from the menu bar. Read-only, your own API key, no orders placed. Not affiliated with Kalshi.">
+<link rel="canonical" href="https://spex.bets/">
+<link rel="icon" type="image/svg+xml" href="/assets/spex-mark.svg">
+<link rel="apple-touch-icon" href="/assets/spex-mark.svg">
+<meta name="theme-color" content="#1E5EFF">
+<meta name="color-scheme" content="light dark">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spex Glance">
+<meta property="og:title" content="Spex Glance — your open Kalshi sports positions, at a glance">
+<meta property="og:description" content="A free macOS app that shows your active Kalshi sports positions in one window and the menu bar. Read-only. Open source. Not affiliated with Kalshi.">
+<meta property="og:url" content="https://spex.bets/">
+<meta property="og:image" content="https://spex.bets/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spex Glance — your open Kalshi sports positions, at a glance">
+<meta name="twitter:description" content="Free macOS app. Active Kalshi sports positions in one window and the menu bar. Read-only, open source.">
+<meta name="twitter:image" content="https://spex.bets/assets/og.png">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Spex Glance",
+  "operatingSystem": "macOS 14+",
+  "applicationCategory": "FinanceApplication",
+  "description": "A free, open-source macOS app that shows your active Kalshi sports positions in one window and from the menu bar. Read-only; uses your own Kalshi API key; never places orders.",
+  "url": "https://spex.bets/",
+  "downloadUrl": "https://github.com/davidmarcantonio/spex-glance/releases/latest",
+  "license": "https://opensource.org/licenses/MIT",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "David Marcantonio", "url": "https://github.com/davidmarcantonio" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is Spex Glance affiliated with Kalshi?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Spex Glance is an independent open-source project and is not affiliated with or endorsed by Kalshi." } },
+    { "@type": "Question", "name": "Can Spex Glance place or cancel orders?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It uses a read-only Kalshi API key and never places, amends, or cancels orders." } },
+    { "@type": "Question", "name": "Does it show all my Kalshi positions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It shows your active sports positions only. Other open positions are counted but not displayed." } },
+    { "@type": "Question", "name": "How much does it cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Nothing. It is free and MIT-licensed. Tips via Ko-fi are welcome but optional." } },
+    { "@type": "Question", "name": "What does it need to run?",
+      "acceptedAnswer": { "@type": "Answer", "text": "macOS 14 or newer and a Kalshi account with a read-only API key you create on kalshi.com." } }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F6F1E4; --cobalt:#1E5EFF; --cream:#FFF4D6; --ember:#FF8A3D; --navy:#0B1E44;
+  --bg:var(--paper); --fg:#14213D; --muted:#5B6478; --card:#FFFFFF; --line:rgba(11,30,68,.12);
+  --tile:var(--cobalt); --tile-fg:var(--cream);
+  --up:#1B8A5A; --down:#C8462F;
+  --display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--navy); --fg:#F1EDE1; --muted:#A9B3C9; --card:#122A5C; --line:rgba(255,244,214,.14);
+    --tile:#2F6BFF; --tile-fg:var(--cream); --up:#4FD38F; --down:#FF7A5C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:var(--navy); --fg:#F1EDE1; --muted:#A9B3C9; --card:#122A5C; --line:rgba(255,244,214,.14);
+  --tile:#2F6BFF; --tile-fg:var(--cream); --up:#4FD38F; --down:#FF7A5C;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--cobalt)}
+h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.01em;line-height:1.1;margin:0 0 .4em}
+h1{font-size:clamp(2.2rem,6vw,4.2rem)}
+h2{font-size:clamp(1.5rem,3.2vw,2.2rem)}
+h3{font-size:1.15rem}
+p{margin:0 0 1em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.eyebrow{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;color:var(--cobalt)}
+.muted{color:var(--muted)}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);font-family:var(--display);font-weight:500;font-size:1.15rem}
+.brand img{width:34px;height:34px;border-radius:9px}
+nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0}
+nav ul a{text-decoration:none;color:var(--fg);font-size:.95rem}
+@media (max-width:640px){nav ul{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;font-family:var(--display);font-weight:500;text-decoration:none;font-size:1rem;border:2px solid transparent;transition:transform .08s ease}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--cobalt);color:var(--cream)}
+.btn.ghost{border-color:var(--cobalt);color:var(--cobalt);background:transparent}
+.btn svg{width:18px;height:18px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 10px}
+.fineprint{font-size:.85rem;color:var(--muted)}
+
+/* hero */
+.hero{padding:40px 0 20px}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero p.lede{font-size:1.2rem;max-width:46ch}
+
+/* mock app window */
+.window{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 60px -30px rgba(11,30,68,.45);overflow:hidden;font-size:.86rem}
+.titlebar{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.dot{width:11px;height:11px;border-radius:50%;background:#D9D4C7}
+.dot:nth-child(1){background:#FF5F57}.dot:nth-child(2){background:#FEBC2E}.dot:nth-child(3){background:#28C840}
+.titlebar span{margin-left:auto;margin-right:auto;font-family:var(--display);font-weight:500}
+.win-body{padding:14px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.tile{background:var(--tile);color:var(--tile-fg);border-radius:12px;padding:10px 12px}
+.tile small{display:block;opacity:.85;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}
+.tile b{font-family:var(--display);font-weight:700;font-size:1.25rem}
+.pnl{display:flex;justify-content:space-between;margin:0 2px 10px;color:var(--muted)}
+.pnl b{color:var(--up)}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.75rem}
+.pill.on{background:var(--cobalt);color:var(--cream);border-color:var(--cobalt)}
+.game{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.game header{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--display);font-weight:500;margin-bottom:6px}
+.live{color:var(--ember);font-size:.72rem;font-weight:700;letter-spacing:.06em}
+.row{display:grid;grid-template-columns:1.6fr .7fr .7fr .7fr;gap:8px;padding:5px 0;border-top:1px dashed var(--line)}
+.row:first-of-type{border-top:0}
+.row .k{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.row .v{font-family:var(--mono)}
+.chance.up{color:var(--up)} .chance.dn{color:var(--down)}
+.menubar{display:flex;align-items:center;gap:10px;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:.85rem;width:max-content;max-width:100%}
+.menubar .mark{width:18px;height:18px;border-radius:5px;background:var(--fg);display:inline-block;mask:url(/assets/spex-mark.svg) center/contain no-repeat;-webkit-mask:url(/assets/spex-mark.svg) center/contain no-repeat}
+.menubar b{color:var(--up);font-family:var(--mono)}
+.caption{font-size:.8rem;color:var(--muted);margin-top:10px}
+
+/* sections */
+section{padding:56px 0}
+section.alt{background:color-mix(in srgb,var(--fg) 4%,var(--bg))}
+.grid{display:grid;gap:18px}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:820px){.grid.c3,.grid.c2{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{margin-top:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+ul.check{list-style:none;padding:0;margin:0}
+ul.check li{padding:6px 0 6px 28px;position:relative}
+ul.check li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border-radius:50%;background:var(--cobalt)}
+ul.check li::after{content:"";position:absolute;left:5px;top:14px;width:6px;height:9px;border:solid var(--cream);border-width:0 2px 2px 0;transform:rotate(45deg)}
+ul.no li::before{background:var(--muted)}
+ul.no li::after{border:0;width:8px;height:2px;background:var(--cream);left:4px;top:18px;transform:none}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+ol.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 18px 64px;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:18px;top:16px;width:32px;height:32px;border-radius:50%;background:var(--cobalt);color:var(--cream);font-family:var(--display);font-weight:700;display:grid;place-items:center}
+ol.steps b{font-family:var(--display);font-weight:500;display:block;margin-bottom:2px}
+details{border-top:1px solid var(--line);padding:12px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:var(--display);font-weight:500;font-size:1.05rem}
+details p{margin:8px 0 0;color:var(--muted)}
+kbd{font-family:var(--mono);font-size:.85em;background:color-mix(in srgb,var(--fg) 8%,var(--bg));border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.reqs{display:flex;flex-wrap:wrap;gap:10px}
+.reqs span{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.9rem;background:var(--card)}
+
+/* footer */
+footer{padding:44px 0 60px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+@media (max-width:820px){footer .cols{grid-template-columns:1fr}}
+footer h4{font-family:var(--display);font-weight:500;color:var(--fg);margin:0 0 8px}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{margin:4px 0}
+.disclaimer{border:1px solid var(--line);border-left:4px solid var(--ember);border-radius:12px;padding:14px 16px;margin:0 0 20px;background:var(--card)}
+.help{font-family:var(--display);font-weight:700}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav aria-label="Primary">
+    <a class="brand" href="/"><img src="/assets/spex-mark.svg" alt="" width="34" height="34">Spex Glance</a>
+    <ul>
+      <li><a href="#gap">Why</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://github.com/davidmarcantonio/spex-glance">GitHub</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Free · Open source · macOS</div>
+      <h1>Your open Kalshi sports positions. One window. One glance.</h1>
+      <p class="lede">Spex Glance shows the sports positions you have open on Kalshi in a clean Mac window and a menu bar item with live P&amp;L. Read-only, using your own free API key. It never places, amends, or cancels an order.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="https://github.com/davidmarcantonio/spex-glance/releases/latest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download for Mac
+        </a>
+        <a class="btn ghost" href="https://github.com/davidmarcantonio/spex-glance">View source on GitHub</a>
+      </div>
+      <p class="fineprint">macOS 14 or newer · Apple silicon &amp; Intel · MIT license · Not affiliated with Kalshi</p>
+    </div>
+
+    <div aria-label="Illustration of the Spex Glance window">
+      <div class="window">
+        <div class="titlebar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>Spex Glance</span></div>
+        <div class="win-body">
+          <div class="tiles">
+            <div class="tile"><small>Cash</small><b>$412.60</b></div>
+            <div class="tile"><small>Positions</small><b>$287.90</b></div>
+            <div class="tile"><small>Total</small><b>$700.50</b></div>
+          </div>
+          <div class="pnl"><span>Unrealized P&amp;L</span><b>+$38.15</b></div>
+          <div class="pills"><span class="pill on">All</span><span class="pill">Baseball</span><span class="pill">Hockey</span><span class="pill">Tennis</span><span class="pill">Combos</span></div>
+
+          <div class="game">
+            <header><span>Dodgers @ Padres</span><span class="live">LIVE · 2h 26m in</span></header>
+            <div class="row"><span class="k">Position</span><span class="k">Cost</span><span class="k">Chance</span><span class="k">Pays</span></div>
+            <div class="row"><span>Yes · Dodgers</span><span class="v">$54.00</span><span class="v chance up">62% ▲</span><span class="v">$100</span></div>
+            <div class="row"><span>No · Over 8.5 runs</span><span class="v">$31.00</span><span class="v chance dn">44% ▼</span><span class="v">$50</span></div>
+          </div>
+          <div class="game">
+            <header><span>Sinner vs. Alcaraz</span><span class="muted">Tomorrow 11:00 AM</span></header>
+            <div class="row"><span>Yes · Sinner</span><span class="v">$47.50</span><span class="v chance up">51% ▲</span><span class="v">$100</span></div>
+          </div>
+          <div class="game">
+            <header><span>3 Market Combo</span><span class="muted">$287.90 pays $325.82</span></header>
+            <div class="row"><span>Bruins ML · Yankees ML · Swiatek</span><span class="v">3 legs</span><span class="v chance">—</span><span class="v">✓ ✓ ·</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="menubar"><span class="mark" aria-hidden="true"></span> Menu bar: <b>+$38.15</b> <span class="muted">· 4 open · Work Mode available</span></div>
+      <p class="caption">Illustrative layout with sample numbers. Real screenshots land with the first release.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gap" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">The gap</div>
+    <h2>Kalshi is fine for trading. It's not built for keeping tabs.</h2>
+    <div class="two">
+      <div class="card">
+        <h3>What you get on Kalshi today</h3>
+        <p class="muted">Your open positions live inside the web portfolio page or the phone app, mixed in with everything else, behind a login and a few taps. If you want to see how tonight's games are going, you go look. Then you go look again.</p>
+      </div>
+      <div class="card">
+        <h3>What Spex Glance adds</h3>
+        <p class="muted">A single pane of glass for your <em>active</em> sports positions, sitting in a Mac window or up in the menu bar. Grouped by game, live clocks, current chance, what it pays, and a running P&amp;L. Nothing to trade, nothing to accidentally click.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scope">
+  <div class="wrap">
+    <div class="eyebrow">Scope, on purpose</div>
+    <h2>Active positions only. Sports only. Read only.</h2>
+    <div class="two">
+      <div class="card">
+        <h3>It does</h3>
+        <ul class="check">
+          <li>Show every open sports position: MLB, NHL, ATP/WTA and whatever else Kalshi tags as sports</li>
+          <li>Group positions by game, with start times and live "minutes in" clocks</li>
+          <li>Show cost, current chance, and payout per side; combos with each leg listed</li>
+          <li>Mark games Final and flip legs to Won / Lost once Kalshi settles</li>
+          <li>Stream live P&amp;L to the menu bar over Kalshi's WebSocket</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>It doesn't</h3>
+        <ul class="check no">
+          <li>Place, amend, or cancel orders. Ever. The key it uses can't.</li>
+          <li>Display non-sports positions (they're counted in your totals, not listed)</li>
+          <li>Show history, settled trades, or charts</li>
+          <li>Tell you what to bet. It relays Kalshi's numbers; it has no opinion.</li>
+          <li>Phone home. No accounts, no analytics beyond an anonymous install count</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Features</div>
+    <h2>Built for people who leave games running in the background.</h2>
+    <div class="grid c3">
+      <div class="card"><h3>Menu bar P&amp;L</h3><p class="muted">Live unrealized P&amp;L in the menu bar, with every position in the dropdown. Priced from Kalshi's ticker feed, not a polling loop.</p></div>
+      <div class="card"><h3>Work Mode</h3><p class="muted">Hides the Spex icon and the dollar sign so a shared screen at the office shows nothing worth asking about.</p></div>
+      <div class="card"><h3>Kalshi's own vocabulary</h3><p class="muted">Cash / Positions / Total, "Yes · Dodgers", "No · Over 8.5 runs". The layout mirrors Kalshi's portfolio so nothing needs translating.</p></div>
+      <div class="card"><h3>Filter and sort</h3><p class="muted">Sport pills (Baseball, Hockey, Tennis, Combos) and sort by Live first, earliest, or latest start. <kbd>⌘E</kbd> expands or collapses everything.</p></div>
+      <div class="card"><h3>Desktop widget</h3><p class="muted">Small, medium, and large widgets for the desktop or Notification Center, for the "is it still close?" check.</p></div>
+      <div class="card"><h3>Light, dark, and yours</h3><p class="muted">Follows the system or pick one. Auto-updates via Sparkle. Launch at login if you want it always on.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">Setup</div>
+    <h2>Three steps, about five minutes.</h2>
+    <p class="muted" style="max-width:60ch">Kalshi has no "sign in with Kalshi" for third-party apps, so connecting is a one-time manual step on kalshi.com. The app walks you through it.</p>
+    <ol class="steps">
+      <li><b>Download and open Spex Glance</b>Grab the latest release from GitHub. It's notarized, so macOS opens it like any other app.</li>
+      <li><b>Create a read-only API key on Kalshi</b>The connect wizard sends you to the right page on kalshi.com, you create a key with read-only permissions, and drop the key file into the app. Keys stay in your macOS Keychain.</li>
+      <li><b>Glance</b>Your open sports positions show up grouped by game. Turn on the menu bar item, pick Work Mode if you need it, and get on with your day.</li>
+    </ol>
+    <div class="reqs" style="margin-top:18px">
+      <span>macOS 14 Sonoma or newer</span><span>A Kalshi account</span><span>A read-only Kalshi API key</span><span>No subscription, no sign-up</span>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h2>Questions people ask before installing a thing that touches their money.</h2>
+    <details open><summary>Is this affiliated with Kalshi?</summary><p>No. Spex Glance is an independent open-source project. It is not affiliated with, endorsed by, or supported by Kalshi. "Kalshi" is their trademark.</p></details>
+    <details><summary>Can it trade on my account?</summary><p>No. It runs on a read-only API key. Kalshi enforces that on their end; the app has no order code to begin with. If Kalshi ever changes how keys work, the read-only requirement still stands in the app.</p></details>
+    <details><summary>Where does my key go?</summary><p>Into your macOS Keychain, on your Mac. The app talks directly to Kalshi's API. There's no Spex server in between.</p></details>
+    <details><summary>Why sports only?</summary><p>Because that's the point. Sports positions resolve on a clock, tonight, and that's what you want to watch. Other open positions still count toward your Cash / Positions / Total tiles; they just aren't listed.</p></details>
+    <details><summary>Are the numbers real time?</summary><p>Prices come from Kalshi's WebSocket ticker, so they're as current as Kalshi sends them. They can lag or be wrong. Confirm on Kalshi before acting on anything.</p></details>
+    <details><summary>What does it cost?</summary><p>Nothing. MIT license, source on GitHub. If it saves you a few tab-switches a night, there's a Ko-fi link in the About tab.</p></details>
+    <details><summary>Does it collect anything?</summary><p>An anonymous install count with macOS version and CPU architecture, via Sparkle's update check, so I know whether anyone is using it. No account, no identifiers, no position data. See the <a href="/privacy.html">privacy note</a>.</p></details>
+    <details><summary>Is there an iPhone version? A self-hosted one?</summary><p>iOS is on the list, not built yet. If you run a homelab, the companion project <a href="https://github.com/davidmarcantonio/haruspex">Haruspex</a> is a self-hosted Kalshi sports-market monitor with a web dashboard; Spex Glance works on its own and doesn't need it.</p></details>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap" style="text-align:center">
+    <h2>Stop refreshing the portfolio page.</h2>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn primary" href="https://github.com/davidmarcantonio/spex-glance/releases/latest">Download for Mac</a>
+      <a class="btn ghost" href="https://ko-fi.com/U4B527UPTU">Tip on Ko-fi</a>
+    </div>
+    <p class="fineprint">Free forever. If you find a bug, <a href="https://github.com/davidmarcantonio/spex-glance/issues">open an issue</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">
+      <strong>Disclaimer.</strong> Spex Glance is not affiliated with or endorsed by Kalshi. It is informational only; nothing here is trading advice. Prices and settlements are relayed from Kalshi as-is and can lag or be wrong. Confirm on Kalshi before acting. Provided under the MIT license, as-is, without warranty of any kind.
+      <div style="margin-top:8px">If gambling is a problem for you or someone you know, call or text <span class="help">1-800-GAMBLER</span>.</div>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>Spex Glance</h4>
+        <p>A cleaner way to keep track of open sports positions on Kalshi, in a window and from the menu bar. Made by <a href="https://github.com/davidmarcantonio">David Marcantonio</a>. Built with Claude.</p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="https://github.com/davidmarcantonio/spex-glance/releases/latest">Download</a></li>
+          <li><a href="https://github.com/davidmarcantonio/spex-glance">Source (GitHub)</a></li>
+          <li><a href="https://github.com/davidmarcantonio/spex-glance/issues">Issues</a></li>
+          <li><a href="https://github.com/davidmarcantonio/haruspex">Haruspex (self-hosted monitor)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="https://github.com/davidmarcantonio/spex-glance/blob/main/LICENSE">MIT license</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li>Bundles Sparkle (MIT) and Space Grotesk (SIL OFL 1.1)</li>
+          <li><a href="https://ko-fi.com/U4B527UPTU">Ko-fi</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

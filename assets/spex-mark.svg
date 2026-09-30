@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Spex mark">
+  <rect width="128" height="128" rx="28" fill="#1E5EFF"/>
+  <g fill="none" stroke="#FFF4D6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- spectacles -->
+    <circle cx="42" cy="52" r="17"/>
+    <circle cx="86" cy="52" r="17"/>
+    <path d="M59 52 h10"/>
+    <path d="M25 50 l-9 -6"/>
+    <path d="M103 50 l9 -6"/>
+    <!-- rising zig-zag grin -->
+    <path d="M30 96 l16 -8 l10 8 l14 -14 l12 8 l16 -18"/>
+    <path d="M86 72 h12 v12"/>
+  </g>
+</svg>
