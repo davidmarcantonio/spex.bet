@@ -1,0 +1,67 @@
+# Builds and deploys spex.bet to GitHub Pages.
+# Before deploying, it asks GitHub for the latest spex-glance release and stamps the
+# version into the pages, so the site never needs a manual edit when the app ships.
+#
+# Runs on: every push to main, once a day, on demand, and when spex-glance's
+# release.sh sends a repository_dispatch (event_type: release).
+
+name: Deploy spex.bet
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 14 * * *"   # daily, 07:17 Pacific (14:17 UTC)
+  workflow_dispatch:
+  repository_dispatch:
+    types: [release]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Look up the latest Spex Glance release
+        id: rel
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="$(gh release view --repo davidmarcantonio/spex-glance --json tagName -q .tagName)"
+          ver="${tag#v}"
+          echo "tag=$tag"  >> "$GITHUB_OUTPUT"
+          echo "ver=$ver"  >> "$GITHUB_OUTPUT"
+          echo "Latest release: $tag"
+
+      - name: Stamp the version into the pages
+        env:
+          VER: ${{ steps.rel.outputs.ver }}
+        run: |
+          set -e
+          # Visible version markers: <span data-version>…</span>
+          sed -i -E "s|(<span data-version>)[^<]*(</span>)|\1v${VER}\2|g" index.html glance/index.html
+          # Structured data on the Glance page
+          sed -i -E "s|\"softwareVersion\": \"[^\"]*\"|\"softwareVersion\": \"${VER}\"|" glance/index.html
+          # Sitemap lastmod for the Glance page = today
+          sed -i -E "s|(<loc>https://spex.bet/glance/</loc><lastmod>)[^<]*(</lastmod>)|\1$(date -u +%F)\2|" sitemap.xml
+          grep -n "data-version" index.html glance/index.html
+          rm -rf .github
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4
