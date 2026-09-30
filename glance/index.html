@@ -54,7 +54,7 @@
     { "@type": "Question", "name": "Are the numbers real time?",
       "acceptedAnswer": { "@type": "Answer", "text": "As current as Kalshi's ticker sends them. They can lag or be wrong. Confirm on Kalshi before acting on anything." } },
     { "@type": "Question", "name": "Does it collect anything?",
-      "acceptedAnswer": { "@type": "Answer", "text": "An anonymous install count with macOS version and CPU architecture, sent with Sparkle's update check. No account, no identifiers, no position data." } },
+      "acceptedAnswer": { "@type": "Answer", "text": "Nothing. No analytics, no crash reports, no install counting. The app makes two kinds of network calls: to Kalshi's API for your positions, and to GitHub once a day to check for updates. GitHub sees an IP address and the app version on that check, the same as any app that updates itself." } },
     { "@type": "Question", "name": "Does Kalshi have a Mac app or desktop app?",
       "acceptedAnswer": { "@type": "Answer", "text": "Not that we know of. Kalshi has a website and iPhone and Android apps. Spex Glance is an independent, read-only Mac app that shows your Kalshi sports positions using Kalshi's public API. It isn't made by Kalshi." } },
     { "@type": "Question", "name": "Does it work with Polymarket, FanDuel, DraftKings, or other sportsbooks?",
@@ -146,7 +146,7 @@
         <div class="eyebrow">What it isn't</div>
         <h2>It can't place a bet. That's the point.</h2>
         <p class="muted">It runs on a read-only Kalshi API key and has no order code. Sports positions only. Anything else you hold is counted in the totals, not listed. It relays Kalshi's numbers and has no opinion about them.</p>
-        <p class="muted">Free, open source, MIT. Source on GitHub, tips on Ko-fi, no account and no analytics beyond an anonymous install count.</p>
+        <p class="muted">Free, open source, MIT. Source on GitHub, tips on Ko-fi, no account, no analytics, no crash reports, no install counting.</p>
       </div>
       <div>
         <img class="shot" src="/assets/screenshot-menubar.png" width="748" height="426" alt="Spex Glance menu bar item showing unrealized P&amp;L, with the dropdown listing every open position, chance, and P&amp;L per side" loading="lazy" style="max-width:100%;width:440px;border-radius:14px 14px 0 0">
@@ -179,7 +179,7 @@
     <details open><summary>Is this affiliated with Kalshi?</summary><p>No. Spex Glance is an independent open-source project. It's not affiliated with, endorsed by, or supported by Kalshi. "Kalshi" is their trademark.</p></details>
     <details><summary>Where does my key go?</summary><p>Into your macOS Keychain, on your Mac. The app talks directly to Kalshi's API. There's no Spex server in between.</p></details>
     <details><summary>Are the numbers real time?</summary><p>As current as Kalshi's ticker sends them. They can lag or be wrong. Confirm on Kalshi before acting on anything.</p></details>
-    <details><summary>Does it collect anything?</summary><p>An anonymous install count with macOS version and CPU architecture, sent with Sparkle's update check. No account, no identifiers, no position data. Details in the <a href="/privacy.html">privacy note</a>.</p></details>
+    <details><summary>Does it collect anything?</summary><p>Nothing. No analytics, no crash reports, no install counting. The app makes two kinds of network calls: to Kalshi's API for your positions, and to GitHub once a day to check for updates. GitHub sees an IP address and the app version on that check, the same as any app that updates itself. Details in the <a href="/privacy.html">privacy note</a>.</p></details>
     <details><summary>Does Kalshi have a Mac app or desktop app?</summary><p>Not that we know of. Kalshi has a website and iPhone and Android apps. Spex Glance is an independent, read-only Mac app that shows your Kalshi sports positions using Kalshi's public API. It isn't made by Kalshi.</p></details>
     <details><summary>Does it work with Polymarket, FanDuel, DraftKings, or other sportsbooks?</summary><p>No. Kalshi only. Spex Glance reads positions through Kalshi's API, and the other platforms have different APIs, different account models, and in the sportsbooks' case no public read API at all. Nothing planned there.</p></details>
     <details><summary>Is there an iPhone version? A self-hosted one?</summary><p>iOS is on the list, not shipped. <a href="/#apps">Spex Board</a>, a self-hosted web dashboard for homelabs, is in the works. Spex Glance works on its own and won't need it.</p></details>
