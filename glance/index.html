@@ -87,7 +87,7 @@
     <a class="brand" href="/"><img src="/assets/app-icon.png" alt="" width="36" height="36">Spex <span class="muted" style="font-weight:500">/ Glance</span></a>
     <ul>
       <li><a href="/">All Spex apps</a></li>
-      <li><a href="#features">What it does</a></li>
+      <li><a href="#features">Features</a></li>
       <li><a href="#how">Setup</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="https://github.com/davidmarcantonio/spex-glance">GitHub</a></li>
@@ -118,22 +118,57 @@
   </div>
 </section>
 
-<section id="features" class="alt">
+<section id="why" class="alt">
   <div class="wrap">
     <div class="split">
       <div>
         <div class="eyebrow">What it's for</div>
         <h2>Keep tabs without keeping a tab open.</h2>
         <p class="muted">Kalshi's portfolio page updates live too. It also needs a browser tab, a login, and the rest of the site around it. This is the same feed in a plain window you can leave open, or a number in the menu bar, without the browser.</p>
-        <div class="grid" style="margin-top:20px">
-          <div class="card"><h3>Straight from Kalshi</h3><p class="muted">Prices arrive over Kalshi's WebSocket ticker, so the numbers are as current as Kalshi sends them. Grouped by game, with start times and "LIVE · 28m in" clocks, and Won or Lost once a game settles.</p></div>
-          <div class="card"><h3>Nothing stored</h3><p class="muted">It streams and displays. No database, no history, no server in between. The one thing kept on your Mac is your API key, in the Keychain.</p></div>
-          <div class="card"><h3>Menu bar and Work Mode</h3><p class="muted">Unrealized P&amp;L next to the icon, every position in the dropdown. Work Mode hides the icon and the dollar sign so a shared screen shows a plain number.</p></div>
-        </div>
+        <p class="muted">Nothing is stored. It streams and displays. No database, no history, no server in between. The one thing kept on your Mac is your API key, in the Keychain.</p>
       </div>
       <div>
         <img class="shot" src="/assets/screenshot-scrolled.png" width="890" height="1372" alt="Spex Glance showing baseball and hockey positions with values and payouts" loading="lazy">
         <p class="caption">Baseball and hockey, further down the same list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="eyebrow">Features</div>
+    <h2>What it does, and not much else.</h2>
+    <div class="grid c3 features">
+      <div class="card">
+        <span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+        <h3>Live from your own Kalshi account</h3>
+        <p class="muted">Your own read-only API key, straight to Kalshi. One connection carries prices, fills, orders and results, so a change on Kalshi shows up in the window within a second or two. A five-minute refresh runs behind it as a safety net, and the live dot goes amber if the feed falls behind.</p>
+      </div>
+      <div class="card">
+        <span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="5"/></svg></span>
+        <h3>Kalshi health, in the menu bar</h3>
+        <p class="muted">When Kalshi is having a bad day, the icon turns ember for degraded, red for down, gray for maintenance, with the reason and how long it's been going in the dropdown. Read from Kalshi's own status endpoint, so you stop wondering whether it's the app, your network, or them.</p>
+      </div>
+      <div class="card">
+        <span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.1A10.9 10.9 0 0 1 12 5c5 0 9 4 10 7a11.5 11.5 0 0 1-2.3 3.4"/><path d="M6.6 6.6C4.3 8 2.7 10 2 12c1 3 5 7 10 7a10.6 10.6 0 0 0 4.4-.9"/></svg></span>
+        <h3>Work Mode</h3>
+        <p class="muted"><kbd>⌘M</kbd> hides the icon, the dollar sign, the money tiles and the buttons. What's left on screen is a list of games. Sharing your display stops being a disclosure.</p>
+      </div>
+      <div class="card">
+        <span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M7 12h10"/><path d="M10 19h4"/></svg></span>
+        <h3>Filter by sport</h3>
+        <p class="muted">Baseball, hockey, tennis, and whatever else Kalshi tags as sports. One click to see only tonight's slate, then sort by Live first or by start time.</p>
+      </div>
+      <div class="card">
+        <span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8.2 7.2 15.8 11"/><path d="M8.2 16.8 15.8 13"/></svg></span>
+        <h3>Combos, leg by leg</h3>
+        <p class="muted">A multi-market combo shows as one card with every leg listed by sport and game, each leg's chance, and a check or cross as they settle. No mental math about which parlay is still alive.</p>
+      </div>
+      <div class="card">
+        <span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <h3>Read-only. Always.</h3>
+        <p class="muted">It runs on a read-only Kalshi key and has no order code. It can't place, change or cancel a bet, and it won't accept a key that could.</p>
       </div>
     </div>
   </div>
@@ -145,7 +180,7 @@
       <div>
         <div class="eyebrow">What it isn't</div>
         <h2>It can't place a bet. That's the point.</h2>
-        <p class="muted">It runs on a read-only Kalshi API key and has no order code. Sports positions only. Anything else you hold is counted in the totals, not listed. It relays Kalshi's numbers and has no opinion about them.</p>
+        <p class="muted">Sports positions only. Anything else you hold is counted in the totals, not listed. It relays Kalshi's numbers and has no opinion about them.</p>
         <p class="muted">Free, open source, MIT. Source on GitHub, tips on Ko-fi, no account, no analytics, no crash reports, no install counting.</p>
       </div>
       <div>
