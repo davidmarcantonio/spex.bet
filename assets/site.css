@@ -46,7 +46,7 @@ nav ul a{text-decoration:none;color:var(--fg);font-size:.95rem}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 12px}
 .fineprint{font-size:.85rem;color:var(--muted)}
 
-.hero{padding:36px 0 30px}
+.hero{padding-top:36px;padding-bottom:30px}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
 @media (max-width:880px){.hero-grid{grid-template-columns:1fr;gap:36px}}
 .hero p.lede{font-size:1.2rem;max-width:48ch}
