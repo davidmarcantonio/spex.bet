@@ -22,16 +22,21 @@ a{color:var(--cobalt)} .back{text-decoration:none;font-family:"Space Grotesk",sy
 <h2>Your Kalshi API key</h2>
 <p>Stored in your macOS Keychain. Used only to call Kalshi's API from your Mac. It is never sent anywhere else. The app requires a read-only key and cannot place, amend, or cancel orders.</p>
 <h2>Your positions and balances</h2>
-<p>Fetched from Kalshi, shown on screen, held in memory while the app runs. Not logged, not uploaded, not shared.</p>
+<p>Fetched from Kalshi, shown on screen, held in memory while the app runs. Not logged, not uploaded, not shared. The realized P&amp;L chart is rebuilt from Kalshi's settlement records each time the app launches rather than kept on disk.</p>
+<h2>Live Line history (optional, off by default)</h2>
+<p>Kalshi has no record of what your portfolio was worth over time. If you turn on Live Line in Settings, the app records your sports total about once a minute so it can chart it. When you turn it on, it asks where to keep that history:</p>
+<p><strong>This Mac only.</strong> Stored encrypted inside the app's own folder on this computer, with the encryption key in the macOS Keychain (never in iCloud Keychain). It exists nowhere else. Disconnect erases it; "Clear history" in Settings deletes it.</p>
+<p><strong>iCloud.</strong> Also synced between your Macs through your private iCloud database (CloudKit), which Apple encrypts and which only your Apple account can read. We have no access to it. If iCloud isn't available, the history stays on this Mac until it is. Switching back to "This Mac only" offers to delete the iCloud copy.</p>
+<p>Your Kalshi key is never part of the history, in either location. The history is thinned over time: full detail for a day, five-minute points for a week, hourly after that. "Save as CSV" exports it to a file you choose.</p>
 <h2>What is collected</h2>
 <p>Nothing. There is no analytics, no crash reporting, no install counting, and no third-party SDK in the app.</p>
 <h2>Network calls the app makes</h2>
-<p>Two. It calls Kalshi's API to fetch your positions and prices, under Kalshi's terms. Once a day it fetches a small update manifest from GitHub (Sparkle, the standard Mac update framework). GitHub sees your IP address and a User-Agent string with the app and macOS version on that request, the same as any self-updating Mac app. You can turn off automatic update checks in Settings.</p>
+<p>Two, or three if you choose iCloud for Live Line. It calls Kalshi's API to fetch your positions and prices, under Kalshi's terms. Once a day it fetches a small update manifest from GitHub (Sparkle, the standard Mac update framework). GitHub sees your IP address and a User-Agent string with the app and macOS version on that request, the same as any self-updating Mac app. You can turn off automatic update checks in Settings. With Live Line set to iCloud, the app also talks to Apple's CloudKit service under your own Apple account.</p>
 <h2>This website</h2>
 <p>Static pages hosted on GitHub Pages. No analytics script, no cookies set by the site. GitHub logs the visitor's IP address for security purposes, per its documentation. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
 <h2>Third parties</h2>
-<p>Kalshi (their API, under their terms), GitHub (downloads, update checks, and this site), Ko-fi (only if you click the tip link).</p>
+<p>Kalshi (their API, under their terms), GitHub (downloads, update checks, and this site), Apple iCloud (only if you choose it for Live Line history), Ko-fi (only if you click the tip link).</p>
 <h2>Contact</h2>
 <p>Open an issue on <a href="https://github.com/davidmarcantonio/spex-glance/issues">GitHub</a>.</p>
-<p><small>Last updated September 2026.</small></p>
+<p><small>Last updated October 2026, for Spex Glance 0.3.0.</small></p>
 </div></body></html>
